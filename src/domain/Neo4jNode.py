@@ -1,5 +1,6 @@
 
 class Neo4jNode:
+
     labels = []
     properties = dict()
 

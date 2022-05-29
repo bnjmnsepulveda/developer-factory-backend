@@ -4,20 +4,15 @@ from domain.Neo4jNode import Neo4jNode
 
 def create_neo4j_node(neo4j_node: Neo4jNode):
 
-    cx = create_neo4j_connection()
-    node_info = [neo4j_node.node]
-    node_info.extend(neo4j_node.labels)
-    node_info = ':'.join(node_info)
+    query_labels = [neo4j_node.node]
+    query_labels.extend(neo4j_node.labels)
+    query_labels = ':'.join(query_labels)
 
-    properties = {
-        'name': neo4j_node.name
-    }
+    properties = {'name': neo4j_node.name}
     properties = {**properties, **neo4j_node.properties}
     query_properties = ', '.join('{0}: ${0}'.format(n) for n in properties)
 
-    query = f"CREATE (n:{node_info} {{ {query_properties} }})"
-    print(query)
+    cx = create_neo4j_connection()
+    query = f"CREATE (n:{query_labels} {{ {query_properties} }})"
+    return cx.execute_transaction(lambda tx: tx.run(query, **properties))
 
-    result = cx.execute_transaction(lambda tx: tx.run(query, **properties))
-
-    return result

@@ -9,7 +9,7 @@ class Neo4jConnection:
     def close(self):
         self.driver.close()
 
-    def execute_transaction(self, query_operation, **kwargs):
+    def execute_transaction(self, query_operation):
         with self.driver.session() as session:
             return session.write_transaction(query_operation)
 
