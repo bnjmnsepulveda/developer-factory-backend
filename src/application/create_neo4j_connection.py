@@ -1,5 +1,10 @@
 from shared.client.neo4j_connection import Neo4jConnection
+from shared.config import NEO4J_CONFIG
 
 
 def create_neo4j_connection():
-    return Neo4jConnection('bolt://localhost:7687', 'neo4j', '1234')
+    return Neo4jConnection(
+        NEO4J_CONFIG['uri'],
+        NEO4J_CONFIG['user'],
+        NEO4J_CONFIG['pass']
+    )
