@@ -1,10 +1,10 @@
 from application.create_neo4j_node import create_neo4j_node
 from domain.model.Neo4jNode import Neo4jNode
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 
 
 @app.route('/', methods=['GET'])

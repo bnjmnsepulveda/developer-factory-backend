@@ -1,5 +1,6 @@
 from application.create_neo4j_connection import create_neo4j_connection
-from domain.Neo4jNode import Neo4jNode
+from application.error import CreateNeo4jNodeException
+from domain.model.Neo4jNode import Neo4jNode
 
 
 def create_neo4j_node(neo4j_node: Neo4jNode):
@@ -15,4 +16,5 @@ def create_neo4j_node(neo4j_node: Neo4jNode):
     cx = create_neo4j_connection()
     query = f"CREATE (n:{query_labels} {{ {query_properties} }})"
     return cx.execute_transaction(lambda tx: tx.run(query, **properties))
+
 
