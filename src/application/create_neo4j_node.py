@@ -1,5 +1,4 @@
 from application.create_neo4j_connection import create_neo4j_connection
-from application.error import CreateNeo4jNodeException
 from domain.model.Neo4jNode import Neo4jNode
 
 
