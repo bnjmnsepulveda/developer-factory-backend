@@ -1,4 +1,4 @@
-from application.neo4j_maintainer import get_neo4j_labels, get_neo4j_node_names, create_neo4j_node
+from application.Neo4jMaintainer import get_neo4j_labels, get_neo4j_node_names, create_neo4j_node
 from domain.model.Neo4jNode import Neo4jNode
 from flask import Flask, request
 from flask_cors import CORS
