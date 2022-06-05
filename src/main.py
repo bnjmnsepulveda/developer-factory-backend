@@ -39,15 +39,13 @@ def get_neo4j_node_label_request():
 
 
 @app.route("/neo4j/node", methods=['POST'])
+@swag_from('./../apidocs/create-neo4j-node.yml')
 def create_neo4j_node_request():
     body = request.get_json()
     print(body)
     neo4j_node = Neo4jNode.from_dict(body)
-    result = create_neo4j_node(neo4j_node)
-    print(f'Result: {result}')
-    return {
-        'message': 'OK'
-    }
+    create_neo4j_node(neo4j_node)
+    return response(status=201, message=f'Neo4j Node(={neo4j_node.name}) Created')
 
 
 @app.route("/neo4j/relationship", methods=['POST'])
