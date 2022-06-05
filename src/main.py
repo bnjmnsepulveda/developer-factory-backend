@@ -2,9 +2,12 @@ from application.Neo4jMaintainer import get_neo4j_labels, get_neo4j_node_names, 
 from domain.model.Neo4jNode import Neo4jNode
 from flask import Flask, request
 from flask_cors import CORS
+from flasgger.utils import swag_from
+from flasgger import Swagger
 
 app = Flask(__name__)
 CORS(app)
+Swagger(app)
 
 
 @app.route('/', methods=['GET'])
@@ -15,6 +18,7 @@ def root():
 
 
 @app.route('/neo4j/node/name', methods=['GET'])
+@swag_from('./../apidocs/neo4j-node-names.yml')
 def get_neo4j_node_name_request():
     node_names = get_neo4j_node_names()
     return {
@@ -24,6 +28,7 @@ def get_neo4j_node_name_request():
 
 
 @app.route('/neo4j/node/label', methods=['GET'])
+@swag_from('./../apidocs/neo4j-node-labels.yml')
 def get_neo4j_node_label_request():
     labels = get_neo4j_labels()
     return {
