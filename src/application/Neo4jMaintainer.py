@@ -11,6 +11,16 @@ def create_neo4j_connection():
     )
 
 
+def write_on_neo4j(query):
+    neo4j_connection = None
+    try:
+        neo4j_connection = create_neo4j_connection()
+        return neo4j_connection.write(query)
+    finally:
+        if neo4j_connection is not None:
+            neo4j_connection.close()
+
+
 def read_from_neo4j(query):
     neo4j_connection = None
     try:
@@ -32,10 +42,10 @@ def create_neo4j_node(neo4j_node: Neo4jNode):
     query_properties = ', '.join('{0}: ${0}'.format(n) for n in properties)
 
     def create_node(tx):
-        query = f"CREATE (n:{query_labels} {{ {query_properties} }})"
-        tx.run(query)
+        query = f"CREATE (n:{query_labels} {{ {query_properties} }}) RETURN n"
+        tx.run(query, **properties)
 
-    return create_neo4j_connection().write(create_node, **properties)
+    return write_on_neo4j(create_node)
 
 
 def get_neo4j_labels():
