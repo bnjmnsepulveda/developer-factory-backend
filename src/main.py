@@ -1,5 +1,4 @@
-from application.create_neo4j_node import create_neo4j_node
-from application.get_neo4j_node import get_neo4j_node
+from application.neo4j_maintainer import get_neo4j_labels, get_neo4j_node_names, create_neo4j_node
 from domain.model.Neo4jNode import Neo4jNode
 from flask import Flask, request
 from flask_cors import CORS
@@ -17,17 +16,19 @@ def root():
 
 @app.route('/neo4j/node/name', methods=['GET'])
 def get_neo4j_node_name_request():
-   # result = get_neo4j_node()
-    #print(result.single().value())
+    node_names = get_neo4j_node_names()
     return {
-        'message': 'OK'
+        'message': 'OK',
+        'data': node_names
     }
 
 
-@app.route('/neo4j/node/label')
+@app.route('/neo4j/node/label', methods=['GET'])
 def get_neo4j_node_label_request():
+    labels = get_neo4j_labels()
     return {
-        'message': 'OK'
+        'message': 'OK',
+        'data': labels
     }
 
 
