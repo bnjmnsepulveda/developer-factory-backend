@@ -8,3 +8,4 @@ plugins/
 import/
 conf/
 .env
+.docker-compose/
