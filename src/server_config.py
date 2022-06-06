@@ -39,7 +39,7 @@ backlog = 2048
 #       of the other worker classes.
 #
 #       A string referring to a Python path to a subclass of
-#       gunicorn.workers.base.Worker. The default provided values
+#       gunicorn.sh.workers.base.Worker. The default provided values
 #       can be seen at
 #       http://docs.gunicorn.org/en/latest/settings.html#worker-class
 #
@@ -160,7 +160,7 @@ access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
 #       probably want to set a name to tell them apart. This requires
 #       that you install the setproctitle module.
 #
-#       A string or None to choose a default of something like 'gunicorn'.
+#       A string or None to choose a default of something like 'gunicorn.sh'.
 #
 
 proc_name = None
