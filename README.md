@@ -41,7 +41,7 @@ Ejecutar el backend
 # installing virtual environment for python 
 python3 -m venv venv 
 # activate virtual env
-source venv/bon/activate
+source venv/bin/activate
 # install dependencies
 pip install -r requirements.txt
 
