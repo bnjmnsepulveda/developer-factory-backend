@@ -1,3 +1,4 @@
+from domain.model.Neo4jRelationship import Neo4jRelationship
 from domain.service.Neo4jConnection import Neo4jConnection
 from shared.config import NEO4J_CONFIG
 from domain.model.Neo4jNode import Neo4jNode
@@ -46,6 +47,26 @@ def create_neo4j_node(neo4j_node: Neo4jNode):
         tx.run(query, **properties)
 
     return write_on_neo4j(create_node)
+
+
+def create_neo4j_relationship(neo4j_relationship: Neo4jRelationship):
+
+    properties = {
+        'nodeA': neo4j_relationship.node_a,
+        'nodeB': neo4j_relationship.node_b
+    }
+    properties = {**properties, **neo4j_relationship.properties}
+    query_properties = ', '.join('{0}: ${0}'.format(n) for n in neo4j_relationship.properties)
+
+    def create_relationship(tx):
+        query = f"""
+            MATCH (na), (nb) 
+               WHERE na.name = $nodeA AND nb.name = $nodeB 
+            CREATE (na)-[r:{neo4j_relationship.name} {{ {query_properties} }}]->(nb) 
+        """
+        tx.run(query, **properties)
+
+    return write_on_neo4j(create_relationship)
 
 
 def get_neo4j_labels():
