@@ -5,4 +5,5 @@ COPY apidocs/ apidocs/
 COPY gunicorn.sh .
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
+EXPOSE 8080
 ENTRYPOINT ["./gunicorn.sh"]
