@@ -21,7 +21,7 @@ chmod +x up-developer-factory-stack.sh
 
 Esto levantara los siguientes servicios
 
-* developer-factory-backend: http://localhost:5000/apidocs
+* developer-factory-backend: http://localhost:8080/apidocs
 * neo4j admin app: http://localhost:7474/
 * neo4j db bolt://localhost:7687
 
