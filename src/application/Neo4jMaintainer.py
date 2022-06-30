@@ -1,3 +1,4 @@
+from application.Neo4jQueryLogger import log_query
 from domain.model.Neo4jRelationship import Neo4jRelationship
 from domain.service.Neo4jConnection import Neo4jConnection
 from shared.config import NEO4J_CONFIG
@@ -44,6 +45,7 @@ def create_neo4j_node(neo4j_node: Neo4jNode):
 
     def create_node(tx):
         query = f"CREATE (n:{query_labels} {{ {query_properties} }}) RETURN n"
+        log_query(query, properties)
         tx.run(query, **properties)
 
     return write_on_neo4j(create_node)
@@ -62,8 +64,9 @@ def create_neo4j_relationship(neo4j_relationship: Neo4jRelationship):
         query = f"""
             MATCH (na), (nb) 
                WHERE na.name = $nodeA AND nb.name = $nodeB 
-            CREATE (na)-[r:{neo4j_relationship.name} {{ {query_properties} }}]->(nb) 
+            CREATE (na)-[r:{neo4j_relationship.name} {{ {query_properties} }}]->(nb)
         """
+        log_query(query, properties)
         tx.run(query, **properties)
 
     return write_on_neo4j(create_relationship)

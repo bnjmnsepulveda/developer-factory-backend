@@ -1,0 +1,5 @@
+CREATE (n:Framework:Framework:Backend:Fullstack:Typescript:Nodejs { name: "Nestjs Framework" }) RETURN n;
+CREATE (n:Knowledge:Knowledge:Nodejs:Technical { name: "Node Fundamentals" }) RETURN n;
+CREATE (n:Knowledge:Security:Fundamentals:Technical { name: "Security" }) RETURN n;
+CREATE (n:Knowledge:Nestjs:Technical:Framework { name: "Nestjs Core" }) RETURN n;
+CREATE (n:Knowledge:Backend:ORM:Database:SQL:NoSQL:Technical { name: "Persistence" }) RETURN n;
